@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sen CV — Générateur de CV Professionnel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--  VUE 1 — AUTH  -->
+<div id="view-auth" class="view">
+
+  <nav class="lp-nav">
+    <div class="lp-logo">
+      <div class="gem">Sn</div>
+      Sen<span>CV</span>
+    </div>
+    <div class="lp-nav-links">
+      <button id="nav-login-btn" class="btn btn-ghost btn-sm">Se connecter</button>
+      <button id="nav-register-btn" class="btn btn-gold btn-sm">Créer un compte</button>
+    </div>
+  </nav>
+
+  <div class="lp-hero">
+
+    <!-- GAUCHE -->
+    <div class="hero-content">
+
+      <div class="hero-tag">Plateforme de CV — Sénégal</div>
+
+      <h1 class="hero-h1">
+        Créez un CV<br>
+        qui vous ouvre<br>
+        <em>les portes.</em>
+      </h1>
+
+      <p class="hero-desc">
+        Sen CV vous permet de créer un CV professionnel en quelques minutes.
+        Choisissez parmi 4 modèles soignés, visualisez en temps réel
+        et exportez en PDF.
+      </p>
+
+      <button class="btn btn-gold btn-lg hero-cta" onclick="document.getElementById('nav-register-btn').click()">
+        Commencer gratuitement
+      </button>
+
+      <div class="hero-feats">
+        <div class="hfeat"><div class="hfeat-dot"></div><span>Aperçu temps réel</span></div>
+        <div class="hfeat"><div class="hfeat-dot"></div><span>2 templates professionnels</span></div>
+        <div class="hfeat"><div class="hfeat-dot"></div><span>Multi-CV par compte</span></div>
+        <div class="hfeat"><div class="hfeat-dot"></div><span>Export PDF</span></div>
+        <div class="hfeat"><div class="hfeat-dot"></div><span>Données 100% locales</span></div>
+        <div class="hfeat"><div class="hfeat-dot"></div><span>Validation téléphone SN</span></div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hstat">
+          <div class="hstat-n"><span id="lp-stat-users">0</span></div>
+          <div class="hstat-l">Comptes créés</div>
+        </div>
+        <div class="hstat-sep"></div>
+        <div class="hstat">
+          <div class="hstat-n"><span id="lp-stat-cvs">0</span></div>
+          <div class="hstat-l">CV générés</div>
+        </div>
+        <div class="hstat-sep"></div>
+        <div class="hstat">
+          <div class="hstat-n">2</div>
+          <div class="hstat-l">Templates</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DROITE — Auth -->
+    <div class="hero-auth-panel" id="hero-auth-panel">
+      <div class="auth-wrap">
+
+        <!-- CONNEXION -->
+        <div id="auth-login" class="auth-panel active">
+          <div class="auth-panel-title">Connexion</div>
+          <div class="auth-panel-sub">Accédez à votre espace et vos CV.</div>
+          <form id="form-login">
+            <div class="auth-form-fields">
+              <div class="fg">
+                <label class="fl">Adresse email <span class="req">*</span></label>
+                <input name="email" type="email" class="inp" placeholder="vous@example.sn" autocomplete="email">
+              </div>
+              <div class="fg">
+                <label class="fl">Mot de passe <span class="req">*</span></label>
+                <div class="pwd-wrap">
+                  <input name="password" type="password" class="inp" id="pwd-login" placeholder="••••••••" autocomplete="current-password">
+                  <button type="button" class="pwd-toggle" onclick="togglePwd('pwd-login')">&#128065;</button>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-gold btn-full btn-lg" style="margin-top:6px">
+                Se connecter
+              </button>
+            </div>
+          </form>
+          <div class="auth-switch">Pas de compte ? <a id="btn-to-register">Créer un compte</a></div>
+        </div>
+
+        <!-- INSCRIPTION -->
+        <div id="auth-register" class="auth-panel">
+          <div class="auth-panel-title">Créer un compte</div>
+          <div class="auth-panel-sub">Gratuit. Vos données restent sur votre appareil.</div>
+          <form id="form-register">
+            <div class="auth-form-fields">
+              <div class="fg">
+                <label class="fl">Nom complet <span class="req">*</span></label>
+                <input name="name" type="text" class="inp" placeholder="Fatou Diallo" autocomplete="name">
+              </div>
+              <div class="fg">
+                <label class="fl">Adresse email <span class="req">*</span></label>
+                <input name="email" type="email" class="inp" placeholder="fatou@example.sn" autocomplete="email">
+              </div>
+              <div class="fg">
+                <label class="fl">Mot de passe <span class="req">*</span></label>
+                <div class="pwd-wrap">
+                  <input name="password" type="password" class="inp" id="pwd-reg" placeholder="Minimum 6 caractères" autocomplete="new-password">
+                  <button type="button" class="pwd-toggle" onclick="togglePwd('pwd-reg')">&#128065;</button>
+                </div>
+              </div>
+              <div class="fg">
+                <label class="fl">Confirmer le mot de passe <span class="req">*</span></label>
+                <input name="confirm" type="password" class="inp" placeholder="••••••••" autocomplete="new-password">
+              </div>
+              <button type="submit" class="btn btn-gold btn-full btn-lg" style="margin-top:6px">
+                Créer mon compte
+              </button>
+            </div>
+          </form>
+          <div class="auth-switch" style="margin-top:16px">Déjà un compte ? <a id="btn-to-login">Se connecter</a></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--  VUE 2 — DASHBOARD  -->
+<div id="view-dashboard" class="view">
+
+  <nav class="dash-nav">
+    <div class="dash-logo">
+      <div class="gem">S</div>
+      Sen<span>CV</span>
+    </div>
+    <div class="dash-nav-right">
+      <div class="user-badge">
+        <div id="dash-user-avatar" class="u-av">?</div>
+        <span id="dash-user-name" class="u-nm">—</span>
+      </div>
+      <button id="btn-dash-open-editor" class="btn btn-gold btn-sm">Éditeur</button>
+      <button id="btn-dash-logout" class="btn btn-ghost btn-sm">Déconnexion</button>
+    </div>
+  </nav>
+
+  <div class="dash-main">
+
+    <div class="dash-banner">
+      <div class="banner-text">
+        <div class="banner-greeting">Bonjour, <em id="dash-greeting-name">—</em></div>
+        <div class="banner-sub">Gérez vos CV professionnels depuis votre espace personnel.</div>
+        <div class="banner-date" id="dash-date"></div>
+      </div>
+      <div class="banner-actions">
+        <button id="btn-dash-new-cv" class="btn btn-gold btn-lg">+ Nouveau CV</button>
+        <button class="btn btn-outline-light btn-lg" onclick="document.getElementById('btn-dash-open-editor').click()">Reprendre l'édition</button>
+      </div>
+    </div>
+
+    <div class="dash-stats-grid">
+      <div class="stat-tile"><div class="stat-tile-n" id="stat-my-cvs">0</div><div class="stat-tile-l">Mes CV</div></div>
+      <div class="stat-tile"><div class="stat-tile-n" id="stat-templates">0</div><div class="stat-tile-l">Templates</div></div>
+      <div class="stat-tile"><div class="stat-tile-n" id="stat-total-users">0</div><div class="stat-tile-l">Utilisateurs inscrits</div></div>
+      <div class="stat-tile"><div class="stat-tile-n" id="stat-total-cvs">0</div><div class="stat-tile-l">CV générés</div></div>
+    </div>
+
+    <div class="section-hdr">
+      <div class="section-hdr-left">
+        <h2>Mes CV</h2>
+        <p>Survolez une carte pour éditer, dupliquer ou supprimer.</p>
+      </div>
+      <button class="btn btn-gold btn-sm" onclick="document.getElementById('btn-dash-new-cv').click()">+ Nouveau</button>
+    </div>
+    <div id="dash-cv-gallery" class="cv-gallery"></div>
+
+    <div class="section-hdr">
+      <div class="section-hdr-left">
+        <h2>Templates disponibles</h2>
+        <p>Changez de template depuis l'éditeur — vos données sont toujours préservées.</p>
+      </div>
+    </div>
+    <div class="tpl-showcase" style="grid-template-columns:1fr 1fr">
+      <div class="tpl-showcase-item">
+        <div style="height:80px;background:#111318;position:relative;overflow:hidden">
+          <div style="position:absolute;left:0;top:0;width:34%;height:100%;background:#0a0a0a;border-right:2px solid rgba(201,168,76,.4)"></div>
+          <div style="position:absolute;left:8px;top:10px;width:18px;height:18px;border-radius:50%;background:rgba(201,168,76,.25);border:1px solid rgba(201,168,76,.45)"></div>
+          <div style="position:absolute;left:37%;top:10px;right:8px;height:8px;background:rgba(255,255,255,.12);border-radius:2px"></div>
+          <div style="position:absolute;left:37%;top:22px;right:14px;height:5px;background:rgba(255,255,255,.07);border-radius:2px"></div>
+          <div style="position:absolute;left:37%;top:32px;right:18px;height:5px;background:rgba(255,255,255,.07);border-radius:2px"></div>
+          <div style="position:absolute;left:6px;top:38px;right:6px;height:2px;background:rgba(201,168,76,.2);border-radius:1px"></div>
+          <div style="position:absolute;left:6px;top:44px;right:6px;height:4px;background:rgba(255,255,255,.06);border-radius:1px"></div>
+          <div style="position:absolute;left:6px;top:52px;right:10px;height:4px;background:rgba(255,255,255,.06);border-radius:1px"></div>
+        </div>
+        <div class="tpl-showcase-body"><div class="tpl-showcase-name">Sidebar Sombre</div><div class="tpl-showcase-desc">Sidebar noir et or, barres de compétences, photo</div></div>
+      </div>
+      <div class="tpl-showcase-item">
+        <div style="height:80px;background:#0f0f0f;position:relative;overflow:hidden">
+          <div style="position:absolute;top:0;left:0;right:0;height:38%;background:#1a1308;border-bottom:2px solid rgba(201,168,76,.4)"></div>
+          <div style="position:absolute;top:7px;left:8px;width:20px;height:20px;border-radius:50%;background:rgba(201,168,76,.25);border:1px solid rgba(201,168,76,.4)"></div>
+          <div style="position:absolute;top:9px;left:34px;right:8px;height:7px;background:rgba(255,255,255,.15);border-radius:2px"></div>
+          <div style="position:absolute;top:20px;left:34px;right:16px;height:5px;background:rgba(201,168,76,.25);border-radius:2px"></div>
+          <div style="position:absolute;top:46%;left:8px;right:8px;height:5px;background:rgba(255,255,255,.08);border-radius:2px"></div>
+          <div style="position:absolute;top:58%;left:8px;right:20px;height:4px;background:rgba(255,255,255,.06);border-radius:2px"></div>
+        </div>
+        <div class="tpl-showcase-body"><div class="tpl-showcase-name">En-tête Plein</div><div class="tpl-showcase-desc">Bandeau noir et or, badges par catégorie</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!--  VUE 3 — ÉDITEUR  -->
+<div id="view-editor" class="view">
+
+  <header class="app-hdr">
+    <div class="hdr-left">
+      <div class="hdr-logo"><div class="gem">S</div>Sen<span>CV</span></div>
+      <div class="hdr-sep"></div>
+      <button id="btn-back-dash" class="btn btn-ghost btn-sm">&#8592; Dashboard</button>
+      <div class="hdr-sep"></div>
+      <span id="cv-title-display" onclick="UI.renameCV()" title="Cliquer pour renommer">—</span>
+      <button id="btn-rename-cv" class="icon-btn" title="Renommer">&#9998;</button>
+    </div>
+    <div class="hdr-right">
+      <span id="autosave-indicator">Sauvegardé</span>
+      <button id="btn-preview-toggle" class="btn btn-ghost btn-sm" style="display:none">Aperçu</button>
+      <button id="btn-export" class="btn btn-gold btn-sm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="12" height="12"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Exporter PDF
+      </button>
+      <div class="user-badge">
+        <div id="user-avatar" class="u-av">?</div>
+        <span id="user-name" class="u-nm">—</span>
+        <button onclick="App.logout()" class="icon-btn" title="Déconnexion" style="margin-left:2px">&#215;</button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="app-sb">
+    <div class="sb-top">
+      <button id="btn-new-cv" class="btn btn-ghost btn-full btn-sm" style="border:1.5px dashed var(--border2);justify-content:center">+ Nouveau CV</button>
+    </div>
+    <div style="overflow-y:auto;flex:1;display:flex;flex-direction:column">
+      <div style="padding:7px 4px 3px;flex-shrink:0">
+        <div class="sb-label">Sections</div>
+        <div class="nav-items">
+          <button class="nav-item active" data-tab="personal">Profil personnel</button>
+          <button class="nav-item" data-tab="experience">Expériences <span class="nav-badge" id="b-exp">0</span></button>
+          <button class="nav-item" data-tab="education">Formation <span class="nav-badge" id="b-edu">0</span></button>
+          <button class="nav-item" data-tab="skills">Compétences <span class="nav-badge" id="b-sk">0</span></button>
+          <button class="nav-item" data-tab="languages">Langues</button>
+          <button class="nav-item" data-tab="interests">Centres d'intérêt</button>
+          <button class="nav-item" data-tab="certifications">Certifications</button>
+          <button class="nav-item" data-tab="templates">Modèle de CV</button>
+        </div>
+      </div>
+      <div class="sb-cv-list">
+        <div class="sb-cv-hdr"><span>Mes CV</span></div>
+        <div id="cv-list-sidebar"></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="app-ed">
+
+    <section id="sec-personal" class="tab-section active">
+      <div class="sec-hdr"><h2>Informations personnelles</h2><p>Apparaissent dans l'en-tête de votre CV.</p></div>
+      <label class="photo-area" for="photo-input">
+        <div class="photo-circle">
+          <div id="photo-placeholder">Photo</div>
+          <img id="photo-preview" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%">
+        </div>
+        <div class="photo-txt"><h4>Photo de profil</h4><p>JPG ou PNG — recommandé 400x400 px</p></div>
+        <input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp" style="display:none">
+      </label>
+      <form id="personal-form">
+        <div class="form-grid">
+          <div class="fg"><label class="fl">Prénom <span class="req">*</span></label><input id="p-firstName" name="firstName" type="text" class="inp" placeholder="Fatou"></div>
+          <div class="fg"><label class="fl">Nom <span class="req">*</span></label><input id="p-lastName" name="lastName" type="text" class="inp" placeholder="DIALLO"></div>
+          <div class="fg full"><label class="fl">Titre professionnel <span class="req">*</span></label><input id="p-title" name="title" type="text" class="inp" placeholder="ex : Développeuse Full Stack"></div>
+          <div class="fg"><label class="fl">Email <span class="req">*</span></label><input id="p-email" name="email" type="email" class="inp" placeholder="fatou@example.sn"></div>
+          <div class="fg"><label class="fl">Téléphone <span class="req">*</span></label><input id="p-phone" name="phone" type="tel" class="inp" placeholder="+221 77 123 45 67"></div>
+          <div class="fg"><label class="fl">Adresse</label><input id="p-address" name="address" type="text" class="inp" placeholder="Médina, Dakar"></div>
+          <div class="fg"><label class="fl">Ville</label><input id="p-city" name="city" type="text" class="inp" placeholder="Dakar"></div>
+          <div class="fg"><label class="fl">LinkedIn</label><input id="p-linkedin" name="linkedin" type="text" class="inp" placeholder="linkedin.com/in/votre-profil"></div>
+          <div class="fg"><label class="fl">Site web</label><input id="p-website" name="website" type="url" class="inp" placeholder="https://monsite.com"></div>
+          <div class="fg full"><label class="fl">Résumé professionnel</label><textarea id="p-summary" name="summary" class="inp inp-ta" rows="3" placeholder="Décrivez votre profil en 2-3 phrases..."></textarea></div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
+          <button type="button" id="btn-validate-personal" class="btn btn-outline btn-sm">Valider</button>
+          <span style="font-size:.65rem;color:var(--text3)">* champs obligatoires</span>
+        </div>
+      </form>
+    </section>
+
+    <section id="sec-experience" class="tab-section">
+      <div class="sec-hdr"><h2>Expériences professionnelles</h2><p>Du plus récent au plus ancien.</p></div>
+      <div id="exp-list"></div>
+      <button id="btn-add-exp" class="add-entry-btn">+ Ajouter une expérience</button>
+    </section>
+
+    <section id="sec-education" class="tab-section">
+      <div class="sec-hdr"><h2>Formation académique</h2><p>Diplômes et formations qualifiantes.</p></div>
+      <div id="edu-list"></div>
+      <button id="btn-add-edu" class="add-entry-btn">+ Ajouter une formation</button>
+    </section>
+
+    <section id="sec-skills" class="tab-section">
+      <div class="sec-hdr"><h2>Compétences</h2><p>Techniques, outils, soft skills.</p></div>
+      <div id="sk-list"></div>
+      <button id="btn-add-sk" class="add-entry-btn">+ Ajouter une compétence</button>
+    </section>
+
+    <section id="sec-languages" class="tab-section">
+      <div class="sec-hdr"><h2>Langues</h2><p>Votre maîtrise linguistique.</p></div>
+      <div class="form-grid" style="margin-bottom:12px">
+        <div class="fg"><label class="fl">Langue</label><input id="lang-name" type="text" class="inp" placeholder="ex : Wolof, Français, Anglais"></div>
+        <div class="fg"><label class="fl">Niveau</label>
+          <select id="lang-level" class="inp inp-sel">
+            <option>Notions</option><option>Intermédiaire</option><option>Avancé</option>
+            <option selected>Courant</option><option>Bilingue</option><option>Langue maternelle</option>
+          </select>
+        </div>
+      </div>
+      <button id="btn-add-lang" class="btn btn-gold btn-sm" style="margin-bottom:16px">+ Ajouter</button>
+      <div id="lang-list"></div>
+    </section>
+
+    <section id="sec-interests" class="tab-section">
+      <div class="sec-hdr"><h2>Centres d'intérêt</h2><p>Hobbies et passions.</p></div>
+      <div style="display:flex;gap:8px;margin-bottom:14px">
+        <input id="int-input" type="text" class="inp" placeholder="ex : Open Source, Photographie..." style="flex:1">
+        <button id="btn-add-int" class="btn btn-gold">+</button>
+      </div>
+      <div id="int-list"></div>
+    </section>
+
+    <section id="sec-certifications" class="tab-section">
+      <div class="sec-hdr"><h2>Certifications</h2><p>Diplômes, badges, attestations.</p></div>
+      <div class="form-grid" style="margin-bottom:12px">
+        <div class="fg"><label class="fl">Certification <span class="req">*</span></label><input id="cert-name" type="text" class="inp" placeholder="AWS, PMP, CCNA..."></div>
+        <div class="fg"><label class="fl">Organisme</label><input id="cert-issuer" type="text" class="inp" placeholder="Amazon, PMI..."></div>
+        <div class="fg"><label class="fl">Année</label><input id="cert-year" type="text" class="inp" placeholder="2024"></div>
+      </div>
+      <button id="btn-add-cert" class="btn btn-gold btn-sm" style="margin-bottom:16px">+ Ajouter</button>
+      <div id="cert-list"></div>
+    </section>
+
+    <section id="sec-templates" class="tab-section">
+      <div class="sec-hdr"><h2>Choisir un modèle</h2><p>4 templates — vos données sont préservées lors du changement.</p></div>
+      <div id="tpl-grid"></div>
+      <div class="info-box">Séparation données / présentation garantie. Changez de template librement.</div>
+    </section>
+
+  </main>
+
+  <aside class="app-pv" id="pv-pane">
+    <div class="pv-top">
+      <h3>Aperçu en direct</h3>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:.63rem;color:var(--text3)">Format A4</span>
+        <button class="btn btn-gold btn-sm" onclick="UI.exportPDF()">PDF</button>
+      </div>
+    </div>
+    <div id="pv-wrap"><div id="pv-inner"><div id="cv-output"></div></div></div>
+  </aside>
+
+</div>
+
+<!-- MODALS -->
+<div id="modal-exp" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-hdr"><div class="modal-title">Expérience</div><button class="modal-close" data-close-modal="modal-exp">&#215;</button></div>
+    <form onsubmit="return false"></form>
+    <div class="modal-footer"><button class="btn btn-ghost btn-sm" data-close-modal="modal-exp">Annuler</button><button class="btn btn-gold btn-sm modal-save-btn">Sauvegarder</button></div>
+  </div>
+</div>
+<div id="modal-edu" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-hdr"><div class="modal-title">Formation</div><button class="modal-close" data-close-modal="modal-edu">&#215;</button></div>
+    <form onsubmit="return false"></form>
+    <div class="modal-footer"><button class="btn btn-ghost btn-sm" data-close-modal="modal-edu">Annuler</button><button class="btn btn-gold btn-sm modal-save-btn">Sauvegarder</button></div>
+  </div>
+</div>
+<div id="modal-sk" class="modal-overlay">
+  <div class="modal-box" style="max-width:400px">
+    <div class="modal-hdr"><div class="modal-title">Compétence</div><button class="modal-close" data-close-modal="modal-sk">&#215;</button></div>
+    <form onsubmit="return false"></form>
+    <div class="modal-footer"><button class="btn btn-ghost btn-sm" data-close-modal="modal-sk">Annuler</button><button class="btn btn-gold btn-sm modal-save-btn">Sauvegarder</button></div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="data.js"></script>
+<script src="validation.js"></script>
+<script src="templates.js"></script>
+<script src="ui.js"></script>
+<script src="app.js"></script>
+<script>
+function togglePwd(id) {
+  const el = document.getElementById(id);
+  if (el) el.type = el.type === 'password' ? 'text' : 'password';
+}
+</script>
+</body>
+</html>
